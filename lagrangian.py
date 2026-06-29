@@ -55,7 +55,7 @@ class Pendulum():
         sol = solve_ivp(self.equations_of_motions, time_span, self.initial_state, t_eval = time_eval)
         return sol
 
-initial_pendulum  = Pendulum(1.0, 1.5, 1.0, 1.0, 15, 30)
+'''initial_pendulum  = Pendulum(1.0, 1.5, 1.0, 1.0, 15, 30)
 print(initial_pendulum.coordinates())
 teval = np.arange(0,10, 0.5)
-print(initial_pendulum.simulate((0,10), teval))
+print(initial_pendulum.simulate((0,10), teval))'''
