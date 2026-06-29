@@ -92,8 +92,8 @@ def main():
     (animated_plot_two,) = axis[1, 1].plot([], [])
     (bobs_two,) = axis[1, 1].plot([], [], marker="o", linestyle="none")
 
-    store_state = initial_pendulum.simulate((0, 400), teval)
-    store_state_two = second_pendulum.simulate((0, 400), teval)
+    store_state = initial_pendulum.simulate((0, 200), teval)
+    store_state_two = second_pendulum.simulate((0, 200), teval)
 
     # Phase Portraits
 
@@ -146,12 +146,12 @@ def main():
         trail_two.set_data(x2_trail_two[:frame], y2_trail_two[:frame])
 
     animation = FuncAnimation(fig=fig, func=update, frames=len(teval), interval=25)
-
+    animation.save("double-pendulum/assets/thethingy.gif", writer="pillow", fps=15)
     plt.show()
 
 
 if __name__ == "__main__":
     initial_pendulum = Pendulum(2, 1, 2, 1, 76, 90)
-    teval = np.arange(0, 400, 0.5)
+    teval = np.arange(0, 200, 0.5)
     second_pendulum = Pendulum(2, 1, 2, 1, 76.1, 90)
     main()
