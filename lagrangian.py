@@ -79,7 +79,7 @@ class Pendulum:
 
 
 def main():
-    fig, axis = plt.subplots(2, 2)
+    fig, axis = plt.subplots(2, 2, figsize=(10, 8))
     max_reach = max(
         initial_pendulum.length1 + initial_pendulum.length2,
         second_pendulum.length1 + second_pendulum.length2,
@@ -147,6 +147,7 @@ def main():
 
     animation = FuncAnimation(fig=fig, func=update, frames=len(teval), interval=25)
     animation.save("double-pendulum/assets/thethingy.gif", writer="pillow", fps=15)
+    fig.tight_layout()
     plt.show()
 
 

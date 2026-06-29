@@ -2,7 +2,7 @@
 
 A double pendulum simulator built from scratch: the equations of motion were hand-derived using Lagrangian mechanics, then numerically integrated and visualized in Python. The project also includes a side-by-side chaos demonstration, comparing two pendulums released from nearly identical starting angles to show sensitive dependence on initial conditions.
 
-![Double pendulum animation](/double-pendulum/assets/thethingy.gif)
+![Double pendulum animation](assets/thethingy.gif)
 
 ## Overview
 
