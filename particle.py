@@ -4,7 +4,7 @@ class Particle():
         self.position = position
         self.velocity = velocity
 
-    def apply_force(self, force, dt): #force is a list/array of dimensions, probably given by numpy. 
+    def apply_force(self, force, dt):
         ax = force[0] / self.mass
         ay = force[1] / self.mass
         self.velocity[0] += ax * dt
