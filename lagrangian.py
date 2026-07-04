@@ -1,8 +1,8 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.animation import FuncAnimation
 from scipy.integrate import solve_ivp
 from scipy.constants import g
-from matplotlib.animation import FuncAnimation
 
 
 class Pendulum:
@@ -26,20 +26,21 @@ class Pendulum:
         y1 = -self.length1 * np.cos(theta_one)
         x2 = self.length1 * np.sin(theta_one) + self.length2 * np.sin(theta_two)
         y2 = -(self.length1 * np.cos(theta_one) + self.length2 * np.cos(theta_two))
-        coordinates = np.array([[x1, y1], [x2, y2]])
-        return coordinates
+        return np.array([[x1, y1], [x2, y2]])
 
     def equations_of_motions(self, t, state):
         theta1, theta2, omega1, omega2 = state  # unpacking tuple
         alpha1 = (
             -g * (self.mass1 + self.mass2) * np.sin(theta1)
             - self.mass2 * g * np.sin(theta1 - 2 * theta2)
-            - 2
-            * self.mass2
-            * np.sin(theta1 - theta2)
-            * (
-                self.length2 * (omega2**2)
-                + self.length1 * (omega1**2) * np.cos(theta1 - theta2)
+            - (
+                2
+                * self.mass2
+                * np.sin(theta1 - theta2)
+                * (
+                    self.length2 * (omega2**2)
+                    + self.length1 * (omega1**2) * np.cos(theta1 - theta2)
+                )
             )
         ) / (
             self.length1
@@ -68,17 +69,19 @@ class Pendulum:
                 - self.mass2 * np.cos(2 * theta1 - 2 * theta2)
             )
         )
-        result = np.array([omega1, omega2, alpha1, alpha2])
-        return result
+        return np.array([omega1, omega2, alpha1, alpha2])
 
     def simulate(self, time_span, time_eval):
-        sol = solve_ivp(
+        return solve_ivp(
             self.equations_of_motions, time_span, self.initial_state, t_eval=time_eval
         )
-        return sol
 
 
 def main():
+    initial_pendulum = Pendulum(2, 1, 2, 1, 76, 90)
+    second_pendulum = Pendulum(2, 1, 2, 1, 76.1, 90)
+    teval = np.arange(0, 200, 0.5)
+
     fig, axis = plt.subplots(2, 2, figsize=(10, 8))
     max_reach = max(
         initial_pendulum.length1 + initial_pendulum.length2,
@@ -152,7 +155,4 @@ def main():
 
 
 if __name__ == "__main__":
-    initial_pendulum = Pendulum(2, 1, 2, 1, 76, 90)
-    teval = np.arange(0, 200, 0.5)
-    second_pendulum = Pendulum(2, 1, 2, 1, 76.1, 90)
     main()
